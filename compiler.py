@@ -25,6 +25,20 @@ import helpers
 from grouping import *
 import diagonalize
 from tableau import *
+
+## Handle potentially missing dependencies.
+import subprocess
+if not "galois" in sys.modules:
+    print("Installing Galois")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "galois"])
+if not "qiskit" in sys.modules:
+    print("Installing Qiskit")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "qiskit"])
+if not "numpy" in sys.modules:
+    print("Installing Numpy")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
+######################################
+
 from qiskit import QuantumCircuit
 
 def compile_diagonal_cluster(X,Z,S,Coefs, sorting= None):
@@ -123,6 +137,3 @@ if __name__=="__main__":
     QC = main_compiler(file, output, grouping_strategy=grouping_strategy)
     # save QC in the result folder
     QC.qasm(filename=os.path.join(results_path, "QC.qasm"))
-
-
-    #print(QC)
