@@ -45,7 +45,7 @@ def compile_diagonal_cluster(X,Z,S,Coefs, sorting= None):
     return qc
 
 
-def main_compiler(file, grouping_strategy=None, sorting=None):
+def main_compiler(file, output, grouping_strategy=None, sorting=None):
 
     pauli_strings = pstrs = helpers.read_hamiltonian(file)
     commuting_clusters = make_clusters(pauli_strings, strategy=grouping_strategy)
@@ -70,9 +70,10 @@ def main_compiler(file, grouping_strategy=None, sorting=None):
         QC = QC.compose(U)
         QC = QC.compose(qc)
         QC = QC.compose(U.inverse())
+        QC.barrier()
 
         # save the intermediate results
-        cluster_path = os.path.join("RESULTS_{0}".format(file), "Cluster_{0}".format(key))
+        cluster_path = os.path.join("RESULTS_{0}".format(output), "Cluster_{0}".format(key))
         os.mkdir(cluster_path)
         numpy.save(os.path.join(cluster_path, "commuting_pauli_strings.npy"), cluster)
         diagonalized_tableau_path = os.path.join(cluster_path, "diagonalized_pauli_strings_tableau.npy")
@@ -104,15 +105,24 @@ if __name__=="__main__":
             except:
                 grouping_strategy = "largest_first"
 
+        if sys.argv[j] == "-o":
+
+            try:
+                output = sys.argv[j+1]
+            except:
+                output = file
+
     # Create folder to outoput the all the results
-    results_path = "RESULTS_{0}".format(file)
+
+    results_path = "RESULTS_{0}".format(output)
+
     if os.path.exists(results_path):
         shutil.rmtree(results_path)
     os.mkdir(results_path)
 
-    QC = main_compiler(file, grouping_strategy=grouping_strategy)
-    print(QC.count_ops())
-    print(QC.depth())
+    QC = main_compiler(file, output, grouping_strategy=grouping_strategy)
+    # save QC in the result folder
+    QC.qasm(filename=os.path.join(results_path, "QC.qasm"))
 
 
     #print(QC)
