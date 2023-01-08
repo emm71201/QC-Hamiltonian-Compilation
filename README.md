@@ -35,7 +35,7 @@ YXYX,0.3
 - __Step 3__: Reading the QC.qasm file  <br>
 > The qasm format can be read by most quantum computing platforms. 
 > In qiskit for example, it can be read as follow: <br>
-<img src="read_QC_example.jpg" alt="Alt text" title="Read the Quantum Circuit">
+<img src="examples/read_QC_example.jpg" alt="Alt text" title="Read the Quantum Circuit">
 
 ## ADVANCED TUTORIAL
 
@@ -65,7 +65,7 @@ For example, to group the Pauli strings with the *indepndent_set* strategy, type
 - __commuting_pauli_strings.npy__: The list of the Pauli strings in this cluster. <br>
 > > Extract this list using NUMPY LOAD <br>
 > > Import the Module pstring provided by our codes. Print the Pauli strings. <br> 
-<img src="print_commuting_paulis.jpg" alt="Alt text" title="Print the Commuting Paulis Example">
+<img src="examples/print_commuting_paulis.jpg" alt="Alt text" title="Print the Commuting Paulis Example">
 
 - __diagonalized_pauli_strings_tableau.npy__:
 > > This file contains the diagonalized Pauli strings in Tableau Representation: X, Z, S, Coefs. <br>
@@ -73,10 +73,10 @@ For example, to group the Pauli strings with the *indepndent_set* strategy, type
 > > - Z: Each row of Z is a Pauli string. 0 means the Pauli matrix is the identity. 1 means the Pauli matrix is the z pauli matrix. <br>
 > > - S: Each row of S contains the sign of the Pauli string. 0 means the sign is + (plus) and 1 means the sign is - (minus).
 > > - Coefs: Each row contains the absolute value of the Coeficient of the Pauli string.
-<img src="diag_tableau_example.jpg" alt="Alt text" title="Read the Diagonalized Paulis Example">
+<img src="examples/diag_tableau_example.jpg" alt="Alt text" title="Read the Diagonalized Paulis Example">
 
 _ **diagonalizing_circuit.qasm**: The quantum circuit of the unitary operator that simultaneously diagonalizes these commuting Pauli strings. 
-<img src="diagonalizing_circ_example.jpg" alt="Alt text" title="Read a Diagonalizing Circuit">
+<img src="examples/diagonalizing_circ_example.jpg" alt="Alt text" title="Read a Diagonalizing Circuit">
 
 _ __time_evolution_circuit.qasm__: The circuit of the time evolution operator of the diagonalized Pauli strings. 
 The circuit can be read as in the example above.
