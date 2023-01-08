@@ -3,6 +3,25 @@
 ## PURPOSE: 
 Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
 
+## Citing: Copy and Paste into the Bib file:
+<code>
+@article{PhysRevD.106.094504, 
+  title = {How many quantum gates do gauge theories require?}, 
+  author = {Murairi, Edison M. and Cervia, Michael J. and Kumar, Hersh and Bedaque, Paulo F. and Alexandru, Andrei}, 
+  journal = {Phys. Rev. D}, 
+  volume = {106}, 
+  issue = {9}, 
+  pages = {094504}, 
+  numpages = {13}, 
+  year = {2022}, 
+  month = {Nov}, 
+  publisher = {American Physical Society}, 
+  doi = {10.1103/PhysRevD.106.094504}, 
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.106.094504} 
+}
+</code>
+
+
 ## QUICK TUTORIAL
 This tutorial walks the user through using this compiler with the default parameters. <br> 
 - __Step 0__:
@@ -15,7 +34,8 @@ Therefore, each line has two columns:
 > > The second column is just the coefficient of the Pauli operator (with the minus sign if necessary). <br>
 > > The first and second columns are separated by a comma and there is no space before or after the comma. 
 
-__Example__: The Hamiltonian file: *sigma.csv* <br>
+__Example__: The Hamiltonian file: *sigma.csv* 
+<code>
 ZZII,-0.25 <br>
 ZIII,-0.25 <br>
 IZII,-0.25 <br>
@@ -25,6 +45,7 @@ IIIZ,-0.25 <br>
 IYIY,0.3 <br>
 YZYZ,0.3 <br>
 YXYX,0.3 
+</code>
 
 - __Step 2__: Run the compiler <br>
 > Using the terminal, navigate to the *QC_Hamiltonian_Compilation* folder <br>
