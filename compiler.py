@@ -114,25 +114,19 @@ if __name__=="__main__":
                 print("After '-f', enter the name of the file containing the Hamiltonian")
 
         if sys.argv[j] == "-g":
-            try:
-                grouping_strategy = sys.argv[j+1]
-            except:
-                pass
+            grouping_strategy = sys.argv[j+1]
+
         if sys.argv[j] == "-o":
-            try:
-                output = sys.argv[j+1]
-            except:
-                pass
+            output = sys.argv[j+1]
+
     if file is None:
         print("No Hamiltonian was given")
-        break
     if output is None:
         output = file
     if grouping_strategy is None:
         grouping_strategy = DSATUR
 
     # Create folder to outoput the all the results
-
     results_path = "RESULTS_{0}".format(output)
 
     if os.path.exists(results_path):
