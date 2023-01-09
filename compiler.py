@@ -125,7 +125,7 @@ if __name__=="__main__":
                 pass
     if file is None:
         print("No Hamiltonian was given")
-        return
+        break
     if output is None:
         output = file
     if grouping_strategy is None:
