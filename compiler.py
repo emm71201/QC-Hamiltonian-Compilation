@@ -124,7 +124,7 @@ if __name__=="__main__":
     if output is None:
         output = file
     if grouping_strategy is None:
-        grouping_strategy = DSATUR
+        grouping_strategy = 'DSATUR'
 
     # Create folder to outoput the all the results
     results_path = "RESULTS_{0}".format(output)
