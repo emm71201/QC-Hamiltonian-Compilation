@@ -105,7 +105,7 @@ def main_compiler(file, output, grouping_strategy=None, sorting=None):
 if __name__=="__main__":
 
     # get the command line arguments
-    arguments = []
+    file, output, grouping_strategy = None, None, None
     for j in range(len(sys.argv)):
         if sys.argv[j] == "-f":
             try:
@@ -117,14 +117,19 @@ if __name__=="__main__":
             try:
                 grouping_strategy = sys.argv[j+1]
             except:
-                grouping_strategy = "largest_first"
-
+                pass
         if sys.argv[j] == "-o":
-
             try:
                 output = sys.argv[j+1]
             except:
-                output = file
+                pass
+    if file is None:
+        print("No Hamiltonian was given")
+        return
+    if output is None:
+        output = file
+    if grouping_strategy is None:
+        grouping_strategy = DSATUR
 
     # Create folder to outoput the all the results
 
