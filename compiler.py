@@ -14,17 +14,6 @@ import os
 import sys
 import shutil
 sys.path.append("binary_tree_traversal_circuit_construction")
-from load_data import *
-import itertools as it
-from node_actions import *
-from node import *
-from cnot import *
-from algorithm import *
-
-import helpers
-from grouping import *
-import diagonalize
-from tableau import *
 
 ## Handle potentially missing dependencies.
 import subprocess
@@ -39,6 +28,17 @@ if not "numpy" in sys.modules:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
 ######################################
 
+from load_data import *
+import itertools as it
+from node_actions import *
+from node import *
+from cnot import *
+from algorithm import *
+
+import helpers
+from grouping import *
+import diagonalize
+from tableau import *
 from qiskit import QuantumCircuit
 
 def compile_diagonal_cluster(X,Z,S,Coefs, sorting= None):
