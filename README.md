@@ -49,7 +49,7 @@ YXYX,0.3
 
 - __Step 2__: Run the compiler <br>
 > Using the terminal, navigate to the *QC_Hamiltonian_Compilation* folder <br>
-> Type the command *python3 compiler.py -f \<path to the Hamiltonian file\>  -o \<output_file\> * <br>
+> Type the command _python3 compiler.py -f \<path to the Hamiltonian file\>  -o \<output_file\>_ <br>
 > The circuit will be compiled and a folder called RESULTS_\<output_file\> will be created. <br>
 > In the results folder, there is a file __QC.qasm__. It contains the final quantum circuit. <br>
 
