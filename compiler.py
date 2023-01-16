@@ -16,16 +16,16 @@ import shutil
 sys.path.append("binary_tree_traversal_circuit_construction")
 
 ## Handle potentially missing dependencies.
-import subprocess
-if not "galois" in sys.modules:
-    print("Installing Galois")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "galois"])
-if not "qiskit" in sys.modules:
-    print("Installing Qiskit")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "qiskit"])
-if not "numpy" in sys.modules:
-    print("Installing Numpy")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
+# import subprocess
+# if not "galois" in sys.modules:
+#     print("Installing Galois")
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", "galois"])
+# if not "qiskit" in sys.modules:
+#     print("Installing Qiskit")
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", "qiskit"])
+# if not "numpy" in sys.modules:
+#     print("Installing Numpy")
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
 ######################################
 
 from load_data import *
@@ -115,7 +115,6 @@ if __name__=="__main__":
 
         if sys.argv[j] == "-g":
             grouping_strategy = sys.argv[j+1]
-
         if sys.argv[j] == "-o":
             output = sys.argv[j+1]
 
@@ -128,7 +127,6 @@ if __name__=="__main__":
 
     # Create folder to outoput the all the results
     results_path = "RESULTS_{0}".format(output)
-
     if os.path.exists(results_path):
         shutil.rmtree(results_path)
     os.mkdir(results_path)

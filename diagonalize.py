@@ -15,6 +15,7 @@
 
 from tableau import *
 from tableau_operations import *
+from diag_optimization import minimize_cnot
 import copy as cp
 
 def mask_column(x,z,col, qmap):
@@ -60,13 +61,15 @@ def choose_basis_vector(nullspace):
     """We pick one of the basis vectors of the null space """
     """We will use this basis to diagonalize one of the columns """
 
-    min_weight = min(numpy.count_nonzero(numpy.array(nullspace), axis=1))
+    return minimize_cnot(nullspace)
 
-    for basis in nullspace:
-
-        if numpy.count_nonzero(numpy.array(basis)) == min_weight:
-
-            return basis
+    # min_weight = min(numpy.count_nonzero(numpy.array(nullspace), axis=1))
+    #
+    # for basis in nullspace:
+    #
+    #     if numpy.count_nonzero(numpy.array(basis)) == min_weight:
+    #
+    #         return basis
 
     #we should never get here
     return
@@ -120,7 +123,6 @@ def reduce_column(basis, qmap, x,z, X,Z,S,U):
 
         # cnot on the main circuit
         X,Z,S,U = cxgate(X,Z,S,U, qmap[p2], qmap[p1])
-
         # cnot on the dummy citcuit
         x,z,s,u = cxgate(x,z,s,u, p2,p1)
 
@@ -147,6 +149,7 @@ def main_diagonalizer(pstrings):
     x = cp.deepcopy(X)
     z = cp.deepcopy(Z)
     x,z, qmap = mask_diagonal_columns(x,z,qmap)
+
 
     # start the loop
     for bb in range(n):

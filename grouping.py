@@ -93,9 +93,9 @@ def commute_v2(pstrings, filename="commute_graph.dimacs"):
             print("i = {0}".format(i))
         f.write("p edge {0} {1}".format(vertexCount, edgeCount))
 
-def make_clusters(pstrings, strategy="largest_first"):
+def make_clusters(pstrings, strategy="DSATUR"):
     """Provide clusters of commuting pauli strings by graph coloring
-    The default strategy is 'largest_first' as implemented in networkx"""
+    The default strategy is 'DSATUR' as implemented in networkx"""
 
     strategies = ['largest_first','random_sequential', 'smallest_last',\
     'independent_set', 'connected_sequential_bfs', 'connected_sequential_dfs', \
@@ -106,7 +106,7 @@ def make_clusters(pstrings, strategy="largest_first"):
 
     if strategy not in strategies:
         print("The strategy is not available. We proceed with the default")
-        strategy="largest_first"
+        strategy="DSATUR"
 
     colors = nx.coloring.greedy_color(G, strategy=strategy)
     maxcol = max(colors.values())

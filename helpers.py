@@ -1,6 +1,6 @@
 from pstring import *
 
-def pauli_to_numercal(pauli):
+def pauli_to_numerical(pauli):
 
     """convert a Pauli string from I,X,Y,Z notation to integer notation
     For example 'IXYZ' is converted to '123' """
@@ -36,6 +36,6 @@ def read_hamiltonian(filepath):
                 return
 
             if pauli != "I"*len(pauli):
-                pstrings.append(pstring(pauli_to_numercal(pauli),coef))
+                pstrings.append(pstring(pauli_to_numerical(pauli),coef))
 
     return pstrings
