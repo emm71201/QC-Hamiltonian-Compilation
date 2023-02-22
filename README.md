@@ -2,7 +2,7 @@
 
 ## PURPOSE:  Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
 
-## Author: EDISON MURAIRI [I'm an inline-style link][https://www.linkedin.com/in/edison-murairi/]
+## Author: EDISON MURAIRI [I'm an inline-style link](https://www.linkedin.com/in/edison-murairi/)
 
 ## Citing: Copy and Paste into the Bib file:
 <code>
