@@ -5,7 +5,6 @@
 ### Author: EDISON MURAIRI [(LinkedIn Profile)](https://www.linkedin.com/in/edison-murairi/)
 
 ### Citing: 
-Copy and Paste into the Bib file:
 <code>
 @article{PhysRevD.106.094504, 
   title = {How many quantum gates do gauge theories require?}, 
