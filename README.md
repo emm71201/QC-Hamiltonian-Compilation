@@ -1,10 +1,10 @@
-# QC Hamiltonian Compilation
+## QC Hamiltonian Compilation
 
-## PURPOSE:  Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
+### PURPOSE:  Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
 
-## Author: EDISON MURAIRI [(LinkedIn Profile)](https://www.linkedin.com/in/edison-murairi/)
+### Author: EDISON MURAIRI [(LinkedIn Profile)](https://www.linkedin.com/in/edison-murairi/)
 
-## Citing: Copy and Paste into the Bib file:
+### Citing: Copy and Paste into the Bib file:
 <code>
 @article{PhysRevD.106.094504, 
   title = {How many quantum gates do gauge theories require?}, 
@@ -23,7 +23,7 @@
 </code>
 
 
-## QUICK TUTORIAL
+### QUICK TUTORIAL
 This tutorial walks the user through using this compiler with the default parameters. <br> 
 - __Step 0__:
 > Expand the Hamiltonian as a linear combination of Pauli Operators (Pauli Strings).
@@ -59,9 +59,9 @@ YXYX,0.3
 > In qiskit for example, it can be read as follow: <br>
 <img src="examples/read_QC_example.jpg" alt="Alt text" title="Read the Quantum Circuit">
 
-## ADVANCED TUTORIAL
+### ADVANCED TUTORIAL
 
-### SPECIFY THE GROUPING STRATEGY:
+#### SPECIFY THE GROUPING STRATEGY:
 One step of the compiler is to group the Pauli strings into clusters (sets) in which all the Pauli strings commute. 
 In principle, it is desirable to use a few clusters as possible. <br>
 
@@ -80,7 +80,7 @@ For example, to group the Pauli strings with the *indepndent_set* strategy, type
 > > *python3 compiler.py -f \<path to the Hamiltonian file\>  -o \<output_file\> -g independent_set* <br>
 
 
-### VIEWING THE INTERMEDIATE RESULTS:
+#### VIEWING THE INTERMEDIATE RESULTS:
 > The intermediate results are stored in the RESULTS_\<output_file\> folder. <br>
 > There is a folder with name starting with *Cluster_* for each set of commuting Pauli strings. <br>
 > Each Cluster Folder contains 4 files:
