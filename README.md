@@ -1,7 +1,8 @@
-# QC_Hamiltonian_Compilation
+# QC Hamiltonian Compilation
 
-## PURPOSE: 
-Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
+## PURPOSE:  Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
+
+## Author: EDISON MURAIRI (emm712@gwu.edu)
 
 ## Citing: Copy and Paste into the Bib file:
 <code>
