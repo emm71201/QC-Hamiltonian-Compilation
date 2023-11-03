@@ -50,14 +50,14 @@ YXYX,0.3
 
 - __Step 2__: Run the compiler <br>
 > Using the terminal, navigate to the *QC_Hamiltonian_Compilation* folder <br>
-> Type the command _python3 compiler.py -f \<path to the Hamiltonian file\>  -o \<output_file\>_ <br>
-> The circuit will be compiled and a folder called RESULTS_\<output_file\> will be created. <br>
-> In the results folder, there is a file __QC.qasm__. It contains the final quantum circuit. <br>
+> Type the command _python3 compiler.py -f \<path to the Hamiltonian file\>  -o <\output directory\> -dt <\dt\> <br>
+> If no -o is given, then the circuit will be compiled and a folder called RESULTS_\<input_file\> will be created in the current directory. <br>
+> If no -dt is given, then the circuit will be a parametric circuit with parameter called dt. <br>
+> In the results folder, there is a file __QC.qpy__. It contains the final quantum circuit. <br>
 
-- __Step 3__: Reading the QC.qasm file  <br>
-> The qasm format can be read by most quantum computing platforms. 
-> In qiskit for example, it can be read as follow: <br>
-<img src="examples/read_QC_example.jpg" alt="Alt text" title="Read the Quantum Circuit">
+- __Step 3__: Reading the QC.qpy file  <br>
+> See the file <\playground.py\> for an example of how to load the circuit. <br>
+> One can copy the circuit data with a fixed parameter value (dt) to a qasm file, which can be read by most platforms.
 
 ### ADVANCED TUTORIAL
 
@@ -81,7 +81,7 @@ For example, to group the Pauli strings with the *indepndent_set* strategy, type
 
 
 #### VIEWING THE INTERMEDIATE RESULTS:
-> The intermediate results are stored in the RESULTS_\<output_file\> folder. <br>
+> The intermediate results are stored in the output directory. <br>
 > There is a folder with name starting with *Cluster_* for each set of commuting Pauli strings. <br>
 > Each Cluster Folder contains 4 files:
 - __commuting_pauli_strings.npy__: The list of the Pauli strings in this cluster. <br>
