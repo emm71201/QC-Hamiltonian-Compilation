@@ -6,12 +6,14 @@ from node import *
 from cnot import *
 from node_actions import *
 
+
 def algorithm(node, qc, n, dt):
 
     cxgates = []
     trgt = n
     realtrgt = n
     nodes = get_all_nodes(node)
+
 
     def traversal(node, trgt, dt, realtrgt):
 

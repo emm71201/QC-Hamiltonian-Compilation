@@ -13,6 +13,7 @@
 import os
 import sys
 import shutil
+from qiskit.circuit import Parameter
 sys.path.append("binary_tree_traversal_circuit_construction")
 
 ## Handle potentially missing dependencies.
@@ -39,9 +40,14 @@ import helpers
 from grouping import *
 import diagonalize
 from tableau import *
-from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit,qpy
 
-def compile_diagonal_cluster(X,Z,S,Coefs, sorting= None):
+def save_circuit(filename, circuit):
+
+    with open(filename, "wb") as qpy_file_write:
+        qpy.dump(circuit, qpy_file_write)
+
+def compile_diagonal_cluster(dt, X,Z,S,Coefs, sorting= None):
 
     """Return the quantum circuit simulating the time evolution of diagonal pauli strings"""
 
@@ -54,12 +60,12 @@ def compile_diagonal_cluster(X,Z,S,Coefs, sorting= None):
     n = X.shape[1]
     root = load_tree(numpy.array(Z),numpy.array(S), numpy.array(Coefs), sorting=sorting)
     qc = QuantumCircuit(n)
-    qc = algorithm(root, qc, n, 1)
+    qc = algorithm(root, qc, n, dt)
 
     return qc
 
 
-def main_compiler(file, output, grouping_strategy=None, sorting=None):
+def main_compiler(dt, file, output, grouping_strategy=None, sorting=None):
 
     pauli_strings = pstrs = helpers.read_hamiltonian(file)
     commuting_clusters = make_clusters(pauli_strings, strategy=grouping_strategy)
@@ -80,22 +86,28 @@ def main_compiler(file, output, grouping_strategy=None, sorting=None):
         cluster = commuting_clusters[key]
         Coefs = numpy.array([pauli_string.coef for pauli_string in cluster])
         X,Z,S,U = diagonalize.main_diagonalizer(cluster)
-        qc = compile_diagonal_cluster(numpy.array(X),numpy.array(Z),numpy.array(S), Coefs, sorting= None)
+        qc = compile_diagonal_cluster(dt, numpy.array(X),numpy.array(Z),numpy.array(S), Coefs, sorting= None)
         QC = QC.compose(U)
         QC = QC.compose(qc)
         QC = QC.compose(U.inverse())
         QC.barrier()
 
         # save the intermediate results
-        cluster_path = os.path.join("RESULTS_{0}".format(output), "Cluster_{0}".format(key))
+        cluster_path = os.path.join(output, "Cluster_{0}".format(key))
         os.mkdir(cluster_path)
+
         numpy.save(os.path.join(cluster_path, "commuting_pauli_strings.npy"), cluster)
         diagonalized_tableau_path = os.path.join(cluster_path, "diagonalized_pauli_strings_tableau.npy")
         numpy.save(diagonalized_tableau_path, {"X":X,"Z":Z,"S":S,"Coefs":Coefs})
-        diagonalizing_circuit_path = os.path.join(cluster_path, "diagonalizing_circuit.qasm")
-        U.qasm(filename=diagonalizing_circuit_path)
-        time_evolution_circuit_path = os.path.join(cluster_path, "time_evolution_circuit.qasm")
-        qc.qasm(filename=time_evolution_circuit_path)
+
+        diagonalizing_circuit_path = os.path.join(cluster_path, "diagonalizing_circuit.qpy")
+        #U.qasm(filename=diagonalizing_circuit_path)
+        save_circuit(diagonalizing_circuit_path, U)
+
+        time_evolution_circuit_path = os.path.join(cluster_path, "time_evolution_circuit.qpy")
+        #qc.qasm(filename=time_evolution_circuit_path)
+        save_circuit(time_evolution_circuit_path, qc)
+
         # Finished saving intermediate results
 
         print("Finished processing cluster {0}".format(key + 1))
@@ -105,7 +117,7 @@ def main_compiler(file, output, grouping_strategy=None, sorting=None):
 if __name__=="__main__":
 
     # get the command line arguments
-    file, output, grouping_strategy = None, None, None
+    file, output, grouping_strategy, dt = None, None, None, None
     for j in range(len(sys.argv)):
         if sys.argv[j] == "-f":
             try:
@@ -118,19 +130,33 @@ if __name__=="__main__":
         if sys.argv[j] == "-o":
             output = sys.argv[j+1]
 
+        if sys.argv[j] == "-dt":
+            try:
+                dt = float(sys.argv[j+1])
+                print(f"dt value found = {dt}")
+            except:
+                print("No dt was provided. The circuit will be parametric with parameter 'dt'")
+
     if file is None:
         print("No Hamiltonian was given")
     if output is None:
-        output = file
+        output = file.split("/")
+        output = output[-1].split(".")[0]
+        output = "RESULTS_{0}".format(output)
+
     if grouping_strategy is None:
         grouping_strategy = "DSATUR"
+    if dt is None:
+        dt = Parameter('dt')
 
     # Create folder to outoput the all the results
-    results_path = "RESULTS_{0}".format(output)
+    #results_path = "RESULTS_{0}".format(output)
+    results_path = output
+    print(results_path)
     if os.path.exists(results_path):
         shutil.rmtree(results_path)
     os.mkdir(results_path)
 
-    QC = main_compiler(file, output, grouping_strategy=grouping_strategy)
+    QC = main_compiler(dt, file, output, grouping_strategy=grouping_strategy)
     # save QC in the result folder
-    QC.qasm(filename=os.path.join(results_path, "QC.qasm"))
+    save_circuit(os.path.join(results_path, "QC.qpy"), QC)

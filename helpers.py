@@ -1,4 +1,5 @@
 from pstring import *
+from qiskit.circuit import qpy_serialization
 
 def pauli_to_numerical(pauli):
 
@@ -39,3 +40,16 @@ def read_hamiltonian(filepath):
                 pstrings.append(pstring(pauli_to_numerical(pauli),coef))
 
     return pstrings
+
+def load_qpycircuit(filepath):
+    """ load a circuit in qiskit qpy format """
+    with open(filepath, 'rb') as fd:
+        circuits = qpy_serialization.load(fd)
+    qc = circuits[0]
+    try:
+        for circuit in circuits[1:]:
+            qc = qc.compose(circuit)
+    except:
+        # There is only one circuit in file
+        pass
+    return qc
