@@ -97,8 +97,8 @@ For example, to group the Pauli strings with the *indepndent_set* strategy, type
 > > - Coefs: Each row contains the absolute value of the Coeficient of the Pauli string.
 <img src="examples/diag_tableau_example.jpg" alt="Alt text" title="Read the Diagonalized Paulis Example">
 
-_ **diagonalizing_circuit.qasm**: The quantum circuit of the unitary operator that simultaneously diagonalizes these commuting Pauli strings. 
-<img src="examples/diagonalizing_circ_example.jpg" alt="Alt text" title="Read a Diagonalizing Circuit">
+_ **diagonalizing_circuit.qpy**: The quantum circuit of the unitary operator that simultaneously diagonalizes these commuting Pauli strings. 
+> See the file <\playground.py\> for how to load the circuit.
 
-_ __time_evolution_circuit.qasm__: The circuit of the time evolution operator of the diagonalized Pauli strings. 
-The circuit can be read as in the example above.
+_ __time_evolution_circuit.qpy__: The circuit of the time evolution operator of the diagonalized Pauli strings. 
+> See the file <\playground.py\> for how to load the circuit.
