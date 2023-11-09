@@ -1,6 +1,6 @@
 ## QC Hamiltonian Compilation
 
-### PURPOSE:  Compile a quantum circuit of the *Hamiltinian Time Evolution Operator*
+### PURPOSE:  Compile a quantum circuit of the *Hamiltonian Time Evolution Operator*
 
 ### Author: EDISON MURAIRI [(LinkedIn Profile)](https://www.linkedin.com/in/edison-murairi/)
 
